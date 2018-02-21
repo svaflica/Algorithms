@@ -39,5 +39,5 @@ void countingSort(const int *array, int length)
 		arrayResult[index] = array[i];
 	}
 
-	return *arrayResult;
+	//return *arrayResult;
 }

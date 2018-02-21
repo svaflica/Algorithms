@@ -4,6 +4,4 @@
 //NotDone but vozvraschaet
 void radixSort(int *array, int length)
 {
-
-	return *array;
 }
