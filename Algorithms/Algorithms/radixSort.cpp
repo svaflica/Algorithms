@@ -2,7 +2,7 @@
 #include "stdafx.h"
 
 //NotDone but vozvraschaet
-int& radixSort(int *array, int length)
+void radixSort(int *array, int length)
 {
 
 	return *array;

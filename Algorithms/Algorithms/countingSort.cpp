@@ -15,7 +15,7 @@ int max(const int *array, int length)
 
 
 //now just for unnegative
-int& countingSort(const int *array, int length)
+void countingSort(const int *array, int length)
 {
 	int lengthSort = max(array, length);
 	int *arraySort = new int[lengthSort + 1];
