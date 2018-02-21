@@ -1,4 +1,18 @@
 #include "header.h"
+#include "stdafx.h"
+
+
+int max(const int *array, int length)
+{
+	int max = array[0];
+
+	for (int i = 1; i < length; i++)
+		if (max < array[i])
+			max = array[i];
+
+	return max;
+}
+
 
 //now just for unnegative
 int& countingSort(const int *array, int length)
@@ -26,16 +40,4 @@ int& countingSort(const int *array, int length)
 	}
 
 	return *arrayResult;
-}
-
-
-int max(const int *array, int length)
-{
-	int max = array[0];
-
-	for (int i = 1; i < length; i++)
-		if (max < array[i])
-			max = array[i];
-
-	return max;
 }

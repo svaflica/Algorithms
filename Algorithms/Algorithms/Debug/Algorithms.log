@@ -1,0 +1,8 @@
+﻿  Algorithms.cpp
+c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(52): warning C4101: i: неиспользованная локальная переменная
+  c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\algorithms.cpp(42): note: выполняется компиляция ссылки на экземпляр шаблон функции "type &insertionSort<int>(type *,int)"
+          with
+          [
+              type=int
+          ]
+  Algorithms.vcxproj -> C:\Users\наталья\Desktop\Algorithms-master\Algorithms\Debug\Algorithms.exe
