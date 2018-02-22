@@ -11,8 +11,8 @@ void bubbleSort(type *array, int length)
 
 				if (array[j] < array[j - 1]) {
 					temp = array[j];
-					array[j] = array[i];
-					array[i] = temp;
+					array[j] = array[j - 1];
+					array[j - 1] = temp;
 				}
 			}
 	}
@@ -22,25 +22,19 @@ void bubbleSort(type *array, int length)
 template <class type>
 void choiceSort(type *array, int length)
 {
-	if (isSorted(array, length) == false) {
-		type min;
-		int pos;
+    if (isSorted(array, length))
+        return;
 
-		for (int i = 0; i < length; i++) {
-			pos = i;
-			min = array[i];
+    type min;
+    int pos;
+	for (int i = 0; i < length; i++) {
+		for (int j = i + 1; j < length; j++)
+			if (array[j] < array[i])
+                pos = j;
 
-			for (int j = i + 1; j < length; j++)
-			{
-				if (array[j] < min)
-				{
-					pos = j;
-					min = array[j];
-				}
-			}
-			array[pos] = array[i];
-			array[i] = min;
-		}
+        min = array[pos];
+		array[pos] = array[i];
+		array[i] = min;
 	}
 }
 
