@@ -19,14 +19,14 @@ void bubbleSort(type *array, int length)
 }
 
 
-template <class type>
+template <class type> // Type
 void choiceSort(type *array, int length)
 {
     if (isSorted(array, length))
         return;
 
     type min;
-    int pos;
+    int pos; // posMin
 	for (int i = 0; i < length; i++) {
 		for (int j = i + 1; j < length; j++)
 			if (array[j] < array[i])
@@ -42,21 +42,18 @@ void choiceSort(type *array, int length)
 template <class type>
 void insertionSort(type *array, int length)
 {
-	if (isSorted(array, length) == false) {
-		type key;
-		int i;
+    if (isSorted(array, length))
+        return;
 
-
-		for (int i = 1, j; i < length; ++i)
-		{
-			key = array[i];
-			for (j = i - 1; j >= 0 && array[j] > key; --j)
-				array[j + 1] = array[j];
-			array[j + 1] = key;
-		}
+    type key;
+    for (int i = 1, j; i < length; ++i)
+	{
+		key = array[i];
+        for (j = i - 1; j >= 0 && array[j] > key; --j)
+			array[j + 1] = array[j];
+		array[j + 1] = key;
 	}
 }
-
 
 void countingSort(int *array, int length);
 
