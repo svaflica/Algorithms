@@ -24,6 +24,9 @@
     <ClInclude Include="header.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -32,10 +35,7 @@
     <ClCompile Include="Algorithms.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="countingSort.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="radixSort.cpp">
+    <ClCompile Include="Point.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
