@@ -21,12 +21,12 @@ int digit(unsigned int value, int i)
 
 
 //is used in countingSort
-int maxValue(const unsigned int *array, int length)
+int maxValue(const int *array, int length)
 {
 	if (length < 1)
 		throw "Wrong length";
 
-	unsigned int max = array[0];
+	int max = array[0];
 
 	for (int i = 1; i < length; i++)
 		if (max < array[i])
@@ -34,6 +34,23 @@ int maxValue(const unsigned int *array, int length)
 
 	return max;
 }
+
+
+//is used in countingSort
+int minValue(const int *array, int length)
+{
+	if (length < 1)
+		throw "Wrong length";
+
+	int min = array[0];
+
+	for (int i = 1; i < length; i++)
+		if (min > array[i])
+			min = array[i];
+
+	return min;
+}
+
 
 //is used in radixSort
 int radix(unsigned int num)
@@ -136,28 +153,29 @@ void insertionSort(Type *array, int length)
 }
 
 
-void countingSort(unsigned int *array, int length)
+void countingSort(int *array, int length)
 {
 	if (isSorted(array, length))
 		return;
 
 
-	int lengthSort = maxValue(array, length);
-	unsigned int *arraySort = new unsigned int[lengthSort + 1];
+	int maxVal = maxValue(array, length);
+	int minVal = minValue(array, length);
 
-	for (int i = 0; i <= lengthSort; i++)
+	int arraySortLength = maxVal - minVal + 1;
+	int *arraySort = new int[arraySortLength];
+
+	for (int i = 0; i < arraySortLength; i++)
 		arraySort[i] = 0;
 
 	for (int i = 0; i < length; i++)
-	{
-		arraySort[array[i]]++;
-	}
+		arraySort[array[i] - minVal]++;
 
-	for (int i = 0; i <= lengthSort; i++)
+	for (int i = 0; i < arraySortLength; i++)
 	{
 		while (arraySort[i] > 0)
 		{
-			*array = i;
+			*array = i + minVal;
 			*array++;
 			arraySort[i]--;
 		}
@@ -166,52 +184,17 @@ void countingSort(unsigned int *array, int length)
 	delete[] arraySort;
 }
 
-//ya dolbilsya s etim algorithmom 5 chasov
-//ya tak i ne ponyal, poetomu spisal u tebya
-//a esche ono ne robit ._.
-void lsdRadixSort(unsigned int* array, int length) 
+
+void lsdRadixSort(unsigned int *array, int length)
 {
-		if (isSorted(array, length))
-			return;
-
-		int maxRadix = radix(maxValue(array, length));
-
-		// Sorting
-		int j, k, d;
-		int* arraySort = new int[2];
-		int* arrayResult = new int[length];
-
-		for (int i = 0; i < maxRadix; ++i)
-		{
-			// counting bits
-			arraySort[0] = 0;
-			arraySort[1] = 0;
-			for (j = 0; j < length; ++j)
-				arraySort[(array[j] >> i) & 1]++;
-
-			// sort order
-			arraySort[1] = arraySort[0];
-			arraySort[0] = 0;
-
-			// put in order by current bit
-			for (j = 0; j < length; ++j)
-			{
-				d = (array[j] >> i) & 1;
-				arrayResult[arraySort[d]] = array[j];
-				arraySort[d]++;
-			}
-
-			// copying
-			for (j = 0; j < length; ++j)
-				array[j] = arrayResult[j];
-		}
-
-		delete[] arrayResult;
-		delete[] arraySort;
+		
 }
 
-//ya esche ne gotov k etomu der'mu
-//void msdRadixSort
+
+void msdRadixSort(unsigned int *array, int length)
+{
+
+}
 
 
 //for tests

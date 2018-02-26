@@ -1,5 +1,4 @@
 ﻿  Algorithms.cpp
-c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(178): warning C4101: k: неиспользованная локальная переменная
-c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(221): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(233): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(196): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(208): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   Algorithms.vcxproj -> C:\Users\наталья\Desktop\Algorithms-master\Algorithms\Debug\Algorithms.exe
