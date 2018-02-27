@@ -36,6 +36,21 @@ int maxValue(const int *array, int length)
 }
 
 
+int maxValue(const unsigned int *array, int length)
+{
+	if (length < 1)
+		throw "Wrong length";
+
+	int max = array[0];
+
+	for (int i = 1; i < length; i++)
+		if (max < array[i])
+			max = array[i];
+
+	return max;
+}
+
+
 //is used in countingSort
 int minValue(const int *array, int length)
 {
@@ -184,18 +199,51 @@ void countingSort(int *array, int length)
 	delete[] arraySort;
 }
 
-
-void lsdRadixSort(unsigned int *array, int length)
+//works only for arrays with less than 20 elements
+//don't know, why
+void lsdRadixSort(unsigned int *array, const int length)
 {
-		
+	int i, count[10];
+	unsigned int max, bucket[10], exponent = 1;
+
+	max = maxValue(array, length);
+
+	while (max / exponent > 0) {
+		//reset count
+		for (i = 0; i < 10; i++) {
+			count[i] = 0;
+		}
+
+		//save count of the occurrence
+		for (i = 0; i < length; i++) {
+			count[(array[i] / exponent) % 10]++;
+		}
+
+		//set count to contain the actual position of the digits
+		for (i = 1; i < 10; i++) {
+			count[i] += count[i - 1];
+		}
+
+		//build the bucket
+		for (i = length - 1; i >= 0; i--) {
+			bucket[count[(array[i] / exponent) % 10] - 1] = array[i];
+			count[(array[i] / exponent) % 10]--;
+		}
+
+		//copy the result to arr
+		for (i = 0; i < length; i++) {
+			array[i] = bucket[i];
+		}
+
+		exponent *= 10;
+	}
 }
 
 
 void msdRadixSort(unsigned int *array, int length)
 {
-
+	
 }
-
 
 //for tests
 void setRandomValue(int* array, int length)
