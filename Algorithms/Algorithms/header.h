@@ -54,7 +54,7 @@ int minValue(const int *array, int length)
 	return min;
 }
 
-
+//is used in radixSort
 int digit(unsigned int num, int n)
 {
 	for (int i = 0; i < n - 1; i++)
@@ -201,6 +201,9 @@ void countingSort(int *array, int length)
 
 void lsdRadixSort(unsigned int array[], const int length)
 {
+	if (isSorted(array, length))
+		return;
+
 	unsigned int maxVal = maxValue(array, length);
 
 	unsigned int *output = new unsigned int[length];
@@ -236,44 +239,6 @@ void lsdRadixSort(unsigned int array[], const int length)
 	delete[] output;
 }
 
-
-void msdRadixSort(unsigned int *array, int length)
-{
-	unsigned int maxLength = radix(maxValue(array, length));
-
-	unsigned int *output = new unsigned int[length];
-	int j, count[10];
-
-	for (int i = maxLength; i >= 0; i--)
-	{
-		for (j = 0; j < 10; j++)
-			count[j] = 0;
-
-		// Store count of occurrences in count[]
-		for (j = 0; j < length; j++)
-			count[digit(array[j], i)]++;
-
-		// Change count[i] so that count[i] now contains actual
-		//  position of this digit in output[]
-		for (j = 1; j < 10; j++)
-			count[j] += count[j - 1];
-
-		// Build the output array
-		for (j = length - 1; j >= 0; j--)
-		{
-			output[count[digit(array[j], i)] - 1] = array[j];
-			count[digit(array[j], i)]--;
-		}
-
-		// Copy the output array to arr[], so that arr[] now
-		// contains sorted numbers according to current digit
-		for (j = 0; j < length; j++)
-			array[j] = output[j];
-	}
-
-	delete[] output;
-
-}
 
 //for tests
 void setRandomValue(int* array, int length)

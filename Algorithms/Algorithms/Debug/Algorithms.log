@@ -1,5 +1,5 @@
 ﻿  Algorithms.cpp
 c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(35): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(284): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(296): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(291): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\наталья\desktop\algorithms-master\algorithms\algorithms\header.h(303): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   Algorithms.vcxproj -> C:\Users\наталья\Desktop\Algorithms-master\Algorithms\Debug\Algorithms.exe
