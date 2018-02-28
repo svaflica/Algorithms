@@ -1,24 +1,12 @@
 #pragma once
 #include <ctime>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 
 //helpFunctions
-
-//is used in radixSort
-int digit(unsigned int value, int i)
-{
-	while (i > 1)
-	{
-		value /= 10;
-		i--;
-	}
-
-	return (value % 10);
-}
-
 
 //is used in countingSort
 int maxValue(const int *array, int length)
@@ -35,7 +23,7 @@ int maxValue(const int *array, int length)
 	return max;
 }
 
-
+//is used in radixSort
 int maxValue(const unsigned int *array, int length)
 {
 	if (length < 1)
@@ -64,6 +52,17 @@ int minValue(const int *array, int length)
 			min = array[i];
 
 	return min;
+}
+
+
+int digit(unsigned int num, int n)
+{
+	for (int i = 0; i < n - 1; i++)
+	{
+		num /= 10;
+	}
+
+	return num % 10;
 }
 
 
@@ -199,50 +198,81 @@ void countingSort(int *array, int length)
 	delete[] arraySort;
 }
 
-//works only for arrays with less than 20 elements
-//don't know, why
-void lsdRadixSort(unsigned int *array, const int length)
+
+void lsdRadixSort(unsigned int array[], const int length)
 {
+	unsigned int maxVal = maxValue(array, length);
+
+	unsigned int *output = new unsigned int[length];
 	int i, count[10];
-	unsigned int max, bucket[10], exponent = 1;
 
-	max = maxValue(array, length);
-
-	while (max / exponent > 0) {
-		//reset count
-		for (i = 0; i < 10; i++) {
+	for (int exp = 1; maxVal / exp > 0; exp *= 10)
+	{
+		for (i = 0; i < 10; i++)
 			count[i] = 0;
-		}
 
-		//save count of the occurrence
-		for (i = 0; i < length; i++) {
-			count[(array[i] / exponent) % 10]++;
-		}
+		// Store count of occurrences in count[]
+		for (i = 0; i < length; i++)
+			count[(array[i] / exp) % 10]++;
 
-		//set count to contain the actual position of the digits
-		for (i = 1; i < 10; i++) {
+		// Change count[i] so that count[i] now contains actual
+		//  position of this digit in output[]
+		for (i = 1; i < 10; i++)
 			count[i] += count[i - 1];
+
+		// Build the output array
+		for (i = length - 1; i >= 0; i--)
+		{
+			output[count[(array[i] / exp) % 10] - 1] = array[i];
+			count[(array[i] / exp) % 10]--;
 		}
 
-		//build the bucket
-		for (i = length - 1; i >= 0; i--) {
-			bucket[count[(array[i] / exponent) % 10] - 1] = array[i];
-			count[(array[i] / exponent) % 10]--;
-		}
-
-		//copy the result to arr
-		for (i = 0; i < length; i++) {
-			array[i] = bucket[i];
-		}
-
-		exponent *= 10;
+		// Copy the output array to arr[], so that arr[] now
+		// contains sorted numbers according to current digit
+		for (i = 0; i < length; i++)
+			array[i] = output[i];
 	}
+
+	delete[] output;
 }
 
 
 void msdRadixSort(unsigned int *array, int length)
 {
-	
+	unsigned int maxLength = radix(maxValue(array, length));
+
+	unsigned int *output = new unsigned int[length];
+	int j, count[10];
+
+	for (int i = maxLength; i >= 0; i--)
+	{
+		for (j = 0; j < 10; j++)
+			count[j] = 0;
+
+		// Store count of occurrences in count[]
+		for (j = 0; j < length; j++)
+			count[digit(array[j], i)]++;
+
+		// Change count[i] so that count[i] now contains actual
+		//  position of this digit in output[]
+		for (j = 1; j < 10; j++)
+			count[j] += count[j - 1];
+
+		// Build the output array
+		for (j = length - 1; j >= 0; j--)
+		{
+			output[count[digit(array[j], i)] - 1] = array[j];
+			count[digit(array[j], i)]--;
+		}
+
+		// Copy the output array to arr[], so that arr[] now
+		// contains sorted numbers according to current digit
+		for (j = 0; j < length; j++)
+			array[j] = output[j];
+	}
+
+	delete[] output;
+
 }
 
 //for tests
